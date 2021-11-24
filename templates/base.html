@@ -1,4 +1,9 @@
 {% extends 'bootstrap/base.html' %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
 {% block title %}
 David's Blog
 {% endblock %}
@@ -26,4 +31,16 @@ David's Blog
     </ul>
   </div>
 </nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% block main %}{% endblock %}
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-mute">Footer</p>
+  </div>
+</footer>
 {% endblock %}
