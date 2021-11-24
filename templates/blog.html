@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% set active_page = "blog" %}
+
+{% block content %}
+{% for post in posts %}
+<table class="table table-hover">
+  <tr>
+    <td>
+      <h2>{{ post.title|safe }}</h2>
+      <p>{{ post.author|safe }} | {{ post.date|safe }}</p>
+      {{ post.body|safe }}
+    </td>
+  </tr>
+</table>
+{% endfor %}
+{% endblock %}
