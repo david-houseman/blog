@@ -32,7 +32,11 @@ def git_version():
 @app.route('/')
 @app.route('/index')
 def index():
+    with open('main.md', 'r') as f:
+        main = md.markdown(f.read())
+        
     return render_template('index.html',
+                           main=main,
                            git_version=git_version())
 
 
