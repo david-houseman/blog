@@ -5,12 +5,8 @@ import markdown as md
 import datetime
 
 from flask import Flask, render_template
-from flask_bootstrap import Bootstrap
-
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
-
 
 def git_version():
     git_shorthash = "Unknown"
@@ -28,6 +24,8 @@ def git_version():
 
     return "{} [{}] by {}.".format(git_shorthash, git_time, git_author)
 
+navigation_bar=[('index', 'Home'),
+                ('blog', 'Blog')]
 
 @app.route('/')
 @app.route('/index')
@@ -36,6 +34,7 @@ def index():
         main = md.markdown(f.read())
         
     return render_template('index.html',
+                           navigation_bar=navigation_bar,
                            main=main,
                            git_version=git_version())
 
@@ -48,11 +47,11 @@ class Post:
             self.date = f.readline().lstrip('date:').strip()
             self.body = md.markdown(f.read())
 
-            print(self.body)
             
 @app.route('/blog')
 def blog():
     posts = [Post(filename) for filename in glob.glob('blog/*md')]    
     return render_template('blog.html',
+                           navigation_bar=navigation_bar,
                            posts=posts,
                            git_version=git_version())

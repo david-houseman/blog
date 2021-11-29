@@ -1,46 +1,48 @@
-{% extends 'bootstrap/base.html' %}
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-{% endblock %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS from bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-{% block title %}
-David's Blog
-{% endblock %}
-
-{% set navigation_bar = [
-('index', 'Home'),
-('blog', 'Blog')
-] -%}
-
-{% block navbar %}
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="{{ url_for('index') }}">
-      <img src="assets/brand.svg" width="30" height="30" alt="">
-      </a>
-  </div>
-  <div class="container">
-    <ul class="nav navbar-nav">
-      {% for href, name in navigation_bar %}
-      <li{% if href == active_page %} class="active"{% endif %}>
-	<a href="{{ url_for(href) }}">{{name}}
+    <!-- Custom CSS overrides -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <title>David's Blog</title>
+  </head>
+  <body>  
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+	<a class="navbar-brand" href="{{ url_for('index') }}">
+	  <img src="assets/brand.svg" width="30" height="30" alt="">
 	</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</nav>
-{% endblock %}
+      </div>
+      <div class="container">
+	<ul class="nav navbar-nav">
+	  {% for href, name in navigation_bar %}
+	  <li{% if href == active_page %} class="active"{% endif %}>
+	    <a href="{{ url_for(href) }}">{{name}}
+	    </a>
+	  </li>
+	  {% endfor %}
+	</ul>
+      </div>
+    </nav>
+    
+    <div class="container">
+      {% block main %}{% endblock %}
+    </div>
+    
+    <footer class="footer">
+      <div class="container">
+	<p class="text-muted">{{ git_version }}</p>
+      </div>
+    </footer>
 
-{% block content %}
-<div class="container">
-  {% block main %}{% endblock %}
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <p class="text-muted">{{ git_version }}</p>
-  </div>
-</footer>
-{% endblock %}
+    <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>
