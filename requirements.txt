@@ -1,5 +1,4 @@
 wheel
 flask
-bootstrap
 markdown
 
