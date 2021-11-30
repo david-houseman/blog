@@ -50,7 +50,9 @@ class Post:
             
 @app.route('/blog')
 def blog():
-    posts = [Post(filename) for filename in glob.glob('blog/*md')]    
+    posts = [Post(filename) for filename in glob.glob('blog/*md')]
+    posts.sort(key=lambda p: p.date, reverse=True)
+    
     return render_template('blog.html',
                            navigation_bar=navigation_bar,
                            posts=posts,
