@@ -14,10 +14,10 @@ def git_version():
     git_author = "Unknown"
 
     git_output = (
-        os.popen("git show --no-patch --format='%h%n%ai%n%an'").read().splitlines()
+        os.popen("git show --format='%h%n%ai%n%an'").read().splitlines()
     )
 
-    if len(git_output) == 3:
+    if len(git_output) >= 3:
         git_shorthash = git_output[0]
         git_time = git_output[1]
         git_author = git_output[2]
