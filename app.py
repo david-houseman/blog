@@ -30,7 +30,7 @@ navigation_bar=[('index', 'Home'),
 @app.route('/')
 @app.route('/index')
 def index():
-    with open('main.html', 'r') as f:
+    with open('static/main/main.html', 'r') as f:
         main = f.read()
         
     return render_template('index.html',
