@@ -1,3 +1,5 @@
+![Pentagon inscribed in unit circle.](pentagon.png)
+
 A regular pentagon is inscribed in the unit circle with vertices at
 the roots of the polynomial $z^5 - 1 = 0$. This may be factorised as
 $$
