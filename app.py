@@ -6,7 +6,7 @@ import datetime
 
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 def git_version():
     git_shorthash = "Unknown"
@@ -53,7 +53,7 @@ class Post:
             
 @app.route('/blog')
 def blog():
-    posts = [Post(dirname) for dirname in glob.glob('blog/202*')]
+    posts = [Post(dirname) for dirname in glob.glob('static/blog/202*')]
     posts.sort(key=lambda p: p.date, reverse=True)
     
     return render_template('blog.html',
