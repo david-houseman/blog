@@ -40,18 +40,21 @@ def index():
 
 
 class Post:
-    def __init__(self, filename):
-        with open(filename, 'r') as f:
-#            self.title = f.readline().lstrip('title:').strip()
-#            self.author = f.readline().lstrip('author:').strip()
-#            self.date = f.readline().lstrip('date:').strip()
+    def __init__(self, dirname):
+        with open(os.path.join(dirname, 'head.json'), 'r') as f:
+            header = json.load(f)
+            self.title = header['title']
+            self.author = header['author']
+            self.date = header['date']
+
+        with open(os.path.join(dirname, 'body.html'), 'r') as f:
             self.body = f.read()
 
             
 @app.route('/blog')
 def blog():
-    posts = [Post(filename) for filename in glob.glob('blog/*html')]
-#    posts.sort(key=lambda p: p.date, reverse=True)
+    posts = [Post(dirname) for dirname in glob.glob('blog/202*')]
+    posts.sort(key=lambda p: p.date, reverse=True)
     
     return render_template('blog.html',
                            navigation_bar=navigation_bar,
