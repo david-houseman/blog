@@ -30,7 +30,7 @@ navigation_bar=[('index', 'Home'),
 @app.route('/')
 @app.route('/index')
 def index():
-    with open('static/main/main.html', 'r') as f:
+    with open('static/main/main.html', 'r', encoding='utf-8') as f:
         main = f.read()
         
     return render_template('index.html',
@@ -47,7 +47,7 @@ class Post:
             self.author = header['author']
             self.date = header['date']
 
-        with open(os.path.join(dirname, 'body.html'), 'r') as f:
+        with open(os.path.join(dirname, 'body.html'), 'r', encoding='utf-8') as f:
             self.body = f.read()
 
             
