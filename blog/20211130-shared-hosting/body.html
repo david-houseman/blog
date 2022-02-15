@@ -2,3 +2,6 @@
 <pre><code>RewriteCond %{SERVER_PORT} 80
 RewriteCond %{HTTP_HOST} ^(www\.)?grey-house\.net
 RewriteRule ^(.*)$ https://www.grey-house.net/$1 [R,L]</code></pre>
+<p>To update the website, go to <code>cPanel</code> -&gt; <code>Software</code> -&gt; <code>Setup Python App</code>, click on <code>Edit the application</code> for the relevant website. To pull git changes, enter</p>
+<pre><code>update.py</code></pre>
+<p>in <code>Execute python script</code> and click on <code>Run script</code>. Then restart the app.</p>

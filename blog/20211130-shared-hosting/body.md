@@ -9,3 +9,10 @@ the following lines to `.htaccess`:
     RewriteCond %{SERVER_PORT} 80
     RewriteCond %{HTTP_HOST} ^(www\.)?grey-house\.net
     RewriteRule ^(.*)$ https://www.grey-house.net/$1 [R,L]
+
+To update the website, go to `cPanel` -> `Software` -> `Setup Python App`,
+click on `Edit the application` for the relevant website. To pull git changes, enter
+
+    update.py
+
+in `Execute python script` and click on `Run script`. Then restart the app.
