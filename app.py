@@ -2,7 +2,6 @@ import os
 import sys
 import glob
 import json
-import markdown as md
 import datetime
 
 from flask import Flask, render_template
@@ -31,8 +30,8 @@ navigation_bar=[('index', 'Home'),
 @app.route('/')
 @app.route('/index')
 def index():
-    with open('main.md', 'r') as f:
-        main = md.markdown(f.read())
+    with open('main.html', 'r') as f:
+        main = f.read()
         
     return render_template('index.html',
                            navigation_bar=navigation_bar,
