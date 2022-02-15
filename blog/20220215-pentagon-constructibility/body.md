@@ -1,7 +1,3 @@
-title: Constructibility of the pentagon
-author: David Houseman
-date: 2022-02-15
-
 A regular pentagon is inscribed in the unit circle with vertices at
 the roots of the polynomial $z^5 - 1 = 0$. This may be factorised as
 $$

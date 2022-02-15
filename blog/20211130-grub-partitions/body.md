@@ -1,7 +1,3 @@
-title: GRUB and partitioning
-author: David Houseman
-date: 2021-11-30
-
 This is a minimal `grub.cfg` config file for the GRUB bootloader
 for a PC with two installed operating systems, `rescue` and `root`.
 GRUB only needs to be installed in one OS (probably `rescue`).

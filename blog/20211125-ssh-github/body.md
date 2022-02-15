@@ -1,7 +1,3 @@
-title: SSH credentials for GitHub
-author: David Houseman
-date: 2021-11-25
-
 Beginning August 2021, GitHub has moved to token-based
 authentication for command line git access. In other words,
 passwords are no longer accepted.
