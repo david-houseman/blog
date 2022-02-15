@@ -1,4 +1,3 @@
-<p>title: SSH credentials for GitHub author: David Houseman date: 2021-11-25</p>
 <p>Beginning August 2021, GitHub has moved to token-based authentication for command line git access. In other words, passwords are no longer accepted.</p>
 <p>The SSH public key/s can be uploaded to github in the Settings -&gt; SSH and GPG keys section of the github website. The accompanying documentation for generating a key pair using <code>ssh-keygen</code> is very clear and helpful.</p>
 <p>The following data need to be added to ~/.ssh/config so that the ssh client authenticates with github using the correct credentials.</p>
