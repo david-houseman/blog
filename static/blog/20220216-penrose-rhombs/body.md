@@ -29,3 +29,13 @@ The following code is used to generate the Penrose P3 tiling by repeated subdivi
     
         va, vb, vc, vx, vy, vz = ua, ub, uc, ux, uy, uz
 
+    plt.figure(figsize=(10, 10))
+    plt.gca().set_aspect('equal')
+    plt.axis('off')
+    
+    for (x, y, z) in zip(vx, vy, vz):
+        plt.plot([x.real, y.real, z.real], [x.imag, y.imag, z.imag], color='black')
+        
+    for (a, b, c) in zip(va, vb, vc):
+        plt.fill([a.real, b.real, c.real], [a.imag, b.imag, c.imag], color='black')
+         
