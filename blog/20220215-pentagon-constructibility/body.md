@@ -25,26 +25,38 @@ $$
 $$
 By the quadratic formula we have
 $$
-\cos \frac{2 \pi}{5} = a = \frac{-1 + \sqrt{5}}{4}
+a = \frac{-1 + \sqrt{5}}{4}.
+$$
+Therefore
+$$
+\cos \frac{2 \pi}{5} = \frac{-1 + \sqrt{5}}{4},
 $$
 which is constructible since $\sqrt{5}$ is the hypotenuse of a right
 triangle with sides of length 1 and 2. Thus the first vertex of the
-regular pentagon may be constructed, and the remaining vertices
-follow trivially.
+regular pentagon may be constructed.
 
 We remark that this result is related to the _golden ratio_
 $$
 \phi = (1 + \sqrt{5}) / 2 = 1.618033 \ldots,
 $$
-the positive root of the quadratic equation $z^2 - z - 1 = 0$.
-We can write
+the positive root of the quadratic equation $z^2 - z - 1 = 0$. We can write
 $$
-\cos \frac{2 \pi}{5} = \frac{1}{2 \phi}
+\cos \frac{2 \pi}{5} = \frac{1}{2 \phi}.
 $$
-and, by the half-angle formula,
+
+The second vertex, $z^2$, may be constructed similarly as 
 $$
-\cos \frac{\pi}{5} = \frac{1}{2} + \frac{1}{2 \phi}.
+\begin{aligned}
+\cos \frac{\pi}{5} &= -\Re(z^2) \\
+&= -(a^2 - b^2) \\
+&= 1 - 2a^2 \\
+&= \frac{1 + \sqrt{5}}{4} \\
+&= \frac{1}{2} + \frac{1}{2 \phi}.
+\end{aligned}
 $$
-These two results are central to the construction of the Penrose tilings.
+The third and fourth vertices are, as noted previously, reflections of the first and 
+second vertices. This completes the construction of the regular pentagon.
+
+The relationship to the golden ratio is central to the construction of the Penrose tilings.
 
 
