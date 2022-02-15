@@ -1,6 +1,7 @@
 import os
 import sys
 import glob
+import json
 import markdown as md
 import datetime
 
@@ -42,16 +43,16 @@ def index():
 class Post:
     def __init__(self, filename):
         with open(filename, 'r') as f:
-            self.title = f.readline().lstrip('title:').strip()
-            self.author = f.readline().lstrip('author:').strip()
-            self.date = f.readline().lstrip('date:').strip()
-            self.body = md.markdown(f.read())
+#            self.title = f.readline().lstrip('title:').strip()
+#            self.author = f.readline().lstrip('author:').strip()
+#            self.date = f.readline().lstrip('date:').strip()
+            self.body = f.read()
 
             
 @app.route('/blog')
 def blog():
-    posts = [Post(filename) for filename in glob.glob('blog/*md')]
-    posts.sort(key=lambda p: p.date, reverse=True)
+    posts = [Post(filename) for filename in glob.glob('blog/*html')]
+#    posts.sort(key=lambda p: p.date, reverse=True)
     
     return render_template('blog.html',
                            navigation_bar=navigation_bar,
