@@ -7,7 +7,7 @@ the roots of the polynomial $z^5 - 1 = 0$. This may be factorised as
 $$
 (z - 1)(z^4 + z^3 + z^2 + z + 1) = 0
 $$
-We write $z = \exp(2 \pi / 5) = a + ib$ with $a, b > 0 $ and
+We write $z = \exp(2 \pi / 5) = a + ib$ with $a, b > 0$ and
 $a^2 + b^2 = 1$. Then
 $$
 z^2 = a^2 - b^2 + 2iab .

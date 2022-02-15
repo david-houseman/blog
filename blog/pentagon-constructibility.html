@@ -1,0 +1,26 @@
+<p>title: Constructibility of the pentagon author: David Houseman date: 2022-02-15</p>
+<p>A regular pentagon is inscribed in the unit circle with vertices at the roots of the polynomial <span class="math inline">\(z^5 - 1 = 0\)</span>. This may be factorised as <span class="math display">\[
+(z - 1)(z^4 + z^3 + z^2 + z + 1) = 0
+\]</span> We write <span class="math inline">\(z = \exp(2 \pi / 5) = a + ib\)</span> with <span class="math inline">\(a, b &gt; 0\)</span> and <span class="math inline">\(a^2 + b^2 = 1\)</span>. Then <span class="math display">\[
+z^2 = a^2 - b^2 + 2iab .
+\]</span> By symmetry, <span class="math display">\[
+\begin{aligned}
+z^3 &amp;= (z^2)^* = a^2 - b^2 - 2iab \\
+z^4 &amp;= z^* = a - ib
+\end{aligned}
+\]</span> Therefore <span class="math display">\[
+\begin{aligned}
+0 &amp;= z^4 + z^3 + z^2 + z + 1 \\
+&amp;= 2a^2 - 2b^2 + 2a + 1 \\
+&amp;= 4a^2 + 2a - 1
+\end{aligned}
+\]</span> By the quadratic formula we have <span class="math display">\[
+\cos \frac{2 \pi}{5} = a = \frac{-1 + \sqrt{5}}{4}
+\]</span> which is constructible since <span class="math inline">\(\sqrt{5}\)</span> is the hypotenuse of a right triangle with sides of length 1 and 2. Thus the first vertex of the regular pentagon may be constructed, and the remaining vertices follow trivially.</p>
+<p>We remark that this result is related to the <em>golden ratio</em> <span class="math display">\[
+\phi = (1 + \sqrt{5}) / 2 = 1.618033 \ldots,
+\]</span> the positive root of the quadratic equation <span class="math inline">\(z^2 - z - 1 = 0\)</span>. We can write <span class="math display">\[
+\cos \frac{2 \pi}{5} = \frac{1}{2 \phi}
+\]</span> and, by the half-angle formula, <span class="math display">\[
+\cos \frac{\pi}{5} = \frac{1}{2} + \frac{1}{2 \phi}.
+\]</span> These two results are central to the construction of the Penrose tilings.</p>
