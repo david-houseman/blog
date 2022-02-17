@@ -1,4 +1,4 @@
-![Penrose P2 tiling](static/blog/20220216-penrose-kites-darts/penrose-II.png)
+![Penrose P2 tiling](static/blog/20220216-penrose-kites-and-darts/penrose-II.png)
 
 The following code is used to generate the Penrose P2 tiling by repeated subdivision.
 
