@@ -9,33 +9,37 @@ The following code is used to generate the Penrose P2 tiling by repeated subdivi
 
     g = (1 + math.sqrt(5)) / 2
 
-    va = np.array([complex(0, 0) for k in range(10)])
-    vb = np.exp(np.array([(k + 1) // 2 * 2 for k in range(10)]) * 1j * math.pi / 5)
-    vc = np.exp(np.array([1 + (k // 2 * 2) for k in range(10)]) * 1j * math.pi / 5)
+    pa = np.array([complex(0, 0) for k in range(10)])
+    pb = np.exp(np.array([(k + 1) // 2 * 2 for k in range(10)]) * 1j * math.pi / 5)
+    pc = np.exp(np.array([1 + (k // 2 * 2) for k in range(10)]) * 1j * math.pi / 5)
     
-    vx = np.array([])
-    vy = np.array([])
-    vz = np.array([])
+    px = np.array([])
+    py = np.array([])
+    pz = np.array([])
         
     for k in range(4):
-        ua = np.concatenate([vb, vb, vz]) 
-        ub = np.concatenate([vc, va / g + vb * (1 - 1 / g), vy / g + vz * (1 - 1 / g)])
-        uc = np.concatenate([va * (1 - 1 / g) + vc / g, va * (1 - 1 / g) + vc / g, vx])
+    	pd = pa / g + pb * (1 - 1 / g)
+        pe = pc / g + pa * (1 - 1 / g)
+        pu = py / g + pz * (1 - 1 / g)
+
+        ta = np.concatenate([pb, pb, pz]) 
+        tb = np.concatenate([pc, pd, pu])
+        tc = np.concatenate([pe, pe, px])
     
-        ux = np.concatenate([vy / g + vz * (1 - 1 / g), va / g + vb * (1 - 1 / g)])
-        uy = np.concatenate([vx, va * (1 - 1 / g) + vc / g])
-        uz = np.concatenate([vy, va])
+        tx = np.concatenate([pu, pd])
+        ty = np.concatenate([px, pe])
+        tz = np.concatenate([py, pa])
     
-        va, vb, vc, vx, vy, vz = ua, ub, uc, ux, uy, uz
+        pa, pb, pc, px, py, pz = ta, tb, tc, tx, ty, tz
 
 
     plt.figure(figsize=(10, 10))
     plt.gca().set_aspect('equal')
     plt.axis('off')
     
-    for (x, y, z) in zip(vx, vy, vz):
+    for (x, y, z) in zip(px, py, pz):
         plt.fill([x.real, y.real, z.real], [x.imag, y.imag, z.imag], color='black')
         
-    for (a, b, c) in zip(va, vb, vc):
+    for (a, b, c) in zip(pa, pb, pc):
         plt.plot([a.real, b.real, c.real], [a.imag, b.imag, c.imag], color='black')
          
