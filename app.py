@@ -1,7 +1,7 @@
 import os
 import git
+import slugify
 import time
-import glob
 import json
 import datetime
 
@@ -33,20 +33,23 @@ def index():
 
 
 class Post:
-    def __init__(self, dirname):
-        with open(os.path.join(dirname, 'head.json'), 'r') as f:
-            header = json.load(f)
-            self.title = header['title']
-            self.author = header['author']
-            self.date = header['date']
+    def __init__(self, header):
 
-        with open(os.path.join(dirname, 'body.html'), 'r', encoding='utf-8') as f:
+        self.title = header['title']
+        self.author = header['author']
+        self.date = header['date']
+        self.dirname = '{}-{}'.format(self.date.replace('-', ''), slugify(self.title))
+        
+        with open(os.path.join(self.dirname, 'body.html'), 'r', encoding='utf-8') as f:
             self.body = f.read()
 
             
 @app.route('/blog')
 def blog():
-    posts = [Post(dirname) for dirname in glob.glob('static/blog/202*')]
+    with open('static/blog/contents.json', 'r') as f:
+        posts = json.load(f)
+    
+    posts = [Post(post) for post in posts]
     posts.sort(key=lambda p: p.date, reverse=True)
     
     return render_template('blog.html',

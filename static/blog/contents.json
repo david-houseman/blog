@@ -1,35 +1,37 @@
-{
-    "title": "Linux for web development",
-    "author": "David Houseman",
-    "date": "2021-11-24"
-}
-{
-    "title": "SSH credentials for GitHub",
-    "author": "David Houseman",
-    "date": "2021-11-25"
-}
-{
-    "title": "GRUB and partitioning",
-    "author": "David Houseman",
-    "date": "2021-11-30"
-}
-{
-    "title": "Shared hosting",
-    "author": "David Houseman",
-    "date": "2021-11-30"
-}
-{
-    "title": "Constructibility of the pentagon",
-    "author": "David Houseman",
-    "date": "2022-02-15"
-}
-{
-    "title": "Penrose Kites and Darts",
-    "author": "David Houseman",
-    "date": "2022-02-16"
-}
-{
-    "title": "Penrose Rhombs",
-    "author": "David Houseman",
-    "date": "2022-02-16"
-}
+[
+    {
+	"title": "Linux for web development",
+	"author": "David Houseman",
+	"date": "2021-11-24"
+    },
+    {
+	"title": "SSH credentials for GitHub",
+	"author": "David Houseman",
+	"date": "2021-11-25"
+    },
+    {
+	"title": "GRUB and partitioning",
+	"author": "David Houseman",
+	"date": "2021-11-30"
+    },
+    {
+	"title": "Shared hosting",
+	"author": "David Houseman",
+	"date": "2021-11-30"
+    },
+    {
+	"title": "Constructibility of the pentagon",
+	"author": "David Houseman",
+	"date": "2022-02-15"
+    },
+    {
+	"title": "Penrose Kites and Darts",
+	"author": "David Houseman",
+	"date": "2022-02-16"
+    },
+    {
+	"title": "Penrose Rhombs",
+	"author": "David Houseman",
+	"date": "2022-02-16"
+    }
+]
