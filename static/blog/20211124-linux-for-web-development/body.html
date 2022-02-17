@@ -4,6 +4,11 @@
 <li>uses <code>git</code> version control</li>
 <li>uses the <code>flask</code> web framework</li>
 <li>uses <code>bootstrap</code> styling</li>
-<li>renders posts from <code>markdown</code>.</li>
+<li>renders posts from markdown using <code>pandoc</code> and <code>mathjax</code>.</li>
 </ul>
+<p>A preview web server for development purposes can be viewed using</p>
+<pre><code>$ FLASK_APP=app
+$ FLASK_ENV=development
+$ flask run</code></pre>
+<p>and directing a web browser to <code>http://127.0.0.1:5000/</code>.</p>
 <p>The source code for this website is viewable at <a href="https://github.com/david-houseman/blog">github.com</a>.</p>
