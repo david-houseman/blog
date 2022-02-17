@@ -14,7 +14,7 @@ def git_version():
     git_author = "Unknown"
 
     git_output = (
-        os.popen("git show --format='%h%n%ai%n%an'").read().splitlines()
+        os.popen("git show --format='%h%n%ai%n%an' --no-patch").read().splitlines()
     )
 
     if len(git_output) >= 3:
