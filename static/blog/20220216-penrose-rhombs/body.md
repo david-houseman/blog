@@ -20,11 +20,11 @@ The following code is used to generate the Penrose P3 tiling by repeated subdivi
         
     for k in range(5):
         ua = np.concatenate([va / g + vb * (1 - 1 / g), vx * (1 - 1 / g) + vy / g]) 
-        ub = np.concatenate([vc, vx / (1 + g) + vz * g / (1 + g)])
+        ub = np.concatenate([vc, vx * (1 - 1 / g) + vz / g])
         uc = np.concatenate([va, vy])
     
-        ux = np.concatenate([vx / (1 + g) + vz * g / (1 + g), vz, vc]) 
-        uy = np.concatenate([vx * (1 - 1 / g) + vy / g, vx / (1 + g) + vz * g / (1 + g), va / g + vb * (1 - 1 / g)])
+        ux = np.concatenate([vx * (1 - 1 / g) + vz / g, vz, vc]) 
+        uy = np.concatenate([vx * (1 - 1 / g) + vy / g, vx * (1 - 1 / g) + vz / g, va / g + vb * (1 - 1 / g)])
         uz = np.concatenate([vx, vy, vb])
     
         va, vb, vc, vx, vy, vz = ua, ub, uc, ux, uy, uz
