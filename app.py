@@ -1,5 +1,6 @@
 import os
-import sys
+import git
+import time
 import glob
 import json
 import datetime
@@ -9,20 +10,12 @@ from flask import Flask, render_template
 app = Flask(__name__, static_url_path='/static')
 
 def git_version():
-    git_shorthash = "Unknown"
-    git_time = "00:00"
-    git_author = "Unknown"
+    commit = git.Repo().head.commit
+    git_shorthash = commit.hexsha[:8]
+    git_time = time.asctime(time.gmtime(commit.committed_date))
+    git_author = commit.author.name
+    return "{} [{} UTC] by {}.".format(git_shorthash, git_time, git_author)
 
-    git_output = (
-        os.popen("git show --format='%h%n%ai%n%an' --no-patch").read().splitlines()
-    )
-
-    if len(git_output) >= 3:
-        git_shorthash = git_output[0]
-        git_time = git_output[1]
-        git_author = git_output[2]
-
-    return "{} [{}] by {}.".format(git_shorthash, git_time, git_author)
 
 navigation_bar=[('index', 'Home'),
                 ('blog', 'Blog')]
