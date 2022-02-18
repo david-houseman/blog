@@ -6,9 +6,8 @@
 <table class="table table-hover">
   <tr>
     <td>
-      <h2>{{ post.title }}</h2>
+      <a href="blog/{{ post.slug }}"><h2>{{ post.title }}</h2></a>
       <p>{{ post.author }} | {{ post.date }}</p>
-      {{ post.body|safe }}
     </td>
   </tr>
 </table>

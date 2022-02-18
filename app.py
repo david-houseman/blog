@@ -1,4 +1,3 @@
-import os
 import git
 from slugify import slugify
 import time
@@ -17,6 +16,20 @@ def git_version():
     return "{} [{} UTC] by {}.".format(git_shorthash, git_time, git_author)
 
 
+class Post:
+    def __init__(self, header):
+        self.title = header['title']
+        self.author = header['author']
+        self.date = header['date']
+        self.slug = '{}-{}'.format(self.date.replace('-', ''), slugify(self.title))
+        self.content = '/static/blog/{}/body.html'.format(self.slug)
+
+with open('static/blog/contents.json', 'r') as f:
+    posts = json.load(f)
+    
+posts = [Post(post) for post in posts]
+posts.sort(key=lambda p: p.date, reverse=True)    
+
 navigation_bar=[('index', 'Home'),
                 ('blog', 'Blog')]
 
@@ -29,27 +42,18 @@ def index():
                            git_version=git_version())
 
 
-class Post:
-    def __init__(self, header):
-
-        self.title = header['title']
-        self.author = header['author']
-        self.date = header['date']
-        self.dirname = '{}-{}'.format(self.date.replace('-', ''), slugify(self.title))
-        
-        with open(os.path.join('static', 'blog', self.dirname, 'body.html'), 'r', encoding='utf-8') as f:
-            self.body = f.read()
-
-            
 @app.route('/blog')
 def blog():
-    with open('static/blog/contents.json', 'r') as f:
-        posts = json.load(f)
-    
-    posts = [Post(post) for post in posts]
-    posts.sort(key=lambda p: p.date, reverse=True)
-    
     return render_template('blog.html',
                            navigation_bar=navigation_bar,
                            posts=posts,
+                           git_version=git_version())
+
+
+@app.route('/blog/<any({}):path>'.format(str([post.slug for post in posts])[1:-1]))
+def render_post(path):
+    post = next(post for post in posts if post.slug == path)    
+    return render_template('post.html',
+                           navigation_bar=navigation_bar,
+                           post=post,
                            git_version=git_version())
