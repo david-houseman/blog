@@ -2,3 +2,4 @@ wheel
 flask
 gitpython
 python-slugify
+pytz
