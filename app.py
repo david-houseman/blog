@@ -23,12 +23,9 @@ navigation_bar=[('index', 'Home'),
 @app.route('/')
 @app.route('/index')
 def index():
-    with open('static/main/main.html', 'r', encoding='utf-8') as f:
-        main = f.read()
-        
     return render_template('index.html',
                            navigation_bar=navigation_bar,
-                           main=main,
+                           content='static/main/main.html',
                            git_version=git_version())
 
 

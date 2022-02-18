@@ -3,6 +3,9 @@
 
 {% block main %}
 <div class="container">
-{{ main|safe }}  
+  <div id="content"></div>
+  <script>
+    $("#content").load("{{ content }}")
+  </script>
 </div>
 {% endblock %}
