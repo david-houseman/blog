@@ -1,6 +1,6 @@
 import os
 import git
-import slugify
+from slugify import slugify
 import time
 import json
 import datetime
@@ -40,7 +40,7 @@ class Post:
         self.date = header['date']
         self.dirname = '{}-{}'.format(self.date.replace('-', ''), slugify(self.title))
         
-        with open(os.path.join(self.dirname, 'body.html'), 'r', encoding='utf-8') as f:
+        with open(os.path.join('static', 'blog', self.dirname, 'body.html'), 'r', encoding='utf-8') as f:
             self.body = f.read()
 
             
