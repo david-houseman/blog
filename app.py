@@ -1,6 +1,7 @@
 import git
 from slugify import slugify
-import time
+import datetime as dt
+import pytz
 import json
 import datetime
 
@@ -11,10 +12,11 @@ app = Flask(__name__, static_url_path='/static')
 def git_version():
     commit = git.Repo().head.commit
     git_shorthash = commit.hexsha[:8]
-    git_time = time.asctime(time.gmtime(commit.committed_date))
-    git_author = commit.author.name
-    return "{} [{} UTC] by {}.".format(git_shorthash, git_time, git_author)
 
+    tz = pytz.timezone('Australia/Sydney')
+    git_time = dt.datetime.fromtimestamp(commit.committed_date, tz).strftime('%Y-%m-%d %H:%M:%S %Z%z')
+    git_author = commit.author.name
+    return "{} [{}] by {}.".format(git_shorthash, git_time, git_author)
 
 class Post:
     def __init__(self, header):
