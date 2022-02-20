@@ -10,13 +10,11 @@ body {
 .navbar-default {
     background-color: #f5f5ff;
     border-color: #e7e7ff;
-    height: 70px;
 }
 
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30px;
     background-color: #f5f5ff;
 }
