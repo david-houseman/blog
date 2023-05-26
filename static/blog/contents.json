@@ -38,5 +38,10 @@
 	"title": "Mandelbrot function",
 	"author": "David Houseman",
 	"date": "2022-02-21"
+    },
+    {
+	"title": "Neural network back-propagation",
+	"author": "David Houseman",
+	"date": "2023-05-26"
     }
 ]

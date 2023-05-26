@@ -1,0 +1,131 @@
+<p>A feed-forward neural network of <span class="math inline">\(n\)</span> layers is a type of non-linear model where the model parameters are matrices <span class="math display">\[
+A^{(0)}, A^{(1)}, \ldots, A^{(n-1)}
+\]</span> which iteratively relate the model inputs <span class="math inline">\(\mathbf{x}\)</span> to the model predictions <span class="math inline">\(\mathbf{\hat{y}}\)</span> by <span class="math display">\[
+\mathbf{\hat{y}}^{(k)} = \sigma^{(k-1)}
+\left( \mathbf{\hat{y}}^{(k-1)} A^{(k-1)} \right)
+\]</span> where <span class="math display">\[
+\begin{aligned}
+\mathbf{\hat{y}}^{(0)} &amp;= \mathbf{x} \\
+\mathbf{\hat{y}}^{(n)} &amp;= \mathbf{\hat{y}} \\
+\end{aligned}
+\]</span> and the <em>activation</em> <span class="math inline">\(\sigma^{(k)}\)</span> is a specified (typically non-linear) scalar function that acts elementwise on the matrix product<br />
+<span class="math inline">\(\mathbf{\hat{y}}^{(k-1)} A^{(k-1)}\)</span>. We call the <span class="math inline">\(\mathbf{\hat{y}}^{(k)}\)</span> the model outputs at layer <span class="math inline">\(k\)</span>; the feed-forward neural net thereby defines model outputs at layer <span class="math inline">\(k\)</span> in terms of model outputs at layer <span class="math inline">\(k-1\)</span>.</p>
+<p>Regarding the activation functions <span class="math inline">\(\sigma^{(k)}\)</span> at layer <span class="math inline">\(k\)</span>, a typical feed-forward neural net might use the non-linear function <span class="math display">\[
+\sigma^{(k)}(z) = \tanh(z)
+\]</span> for all <span class="math inline">\(k = 0,1,\ldots (n-2)\)</span>, and <span class="math display">\[
+\sigma^{(n-1)}(z) = z
+\]</span> for the final layer. (If the final activation were also <span class="math inline">\(\tanh\)</span>, the net output would be bounded by the range of <span class="math inline">\(\tanh\)</span> to <span class="math inline">\((-1,1)\)</span>.)</p>
+<p><em>Model training</em> is the process of optimising the <span class="math inline">\(A^{(k)}\)</span> so that for a given set of model inputs <span class="math inline">\(\mathbf{x}_i\)</span> and model targets <span class="math inline">\(\mathbf{y}_i\)</span> with <span class="math inline">\(i = 1,2,\ldots,N\)</span>, the model predictions <span class="math inline">\(\mathbf{\hat{y}}_i\)</span> minimise the <em>loss</em> <span class="math display">\[
+S = \frac{1}{2} \sum_i \left( \mathbf{y}_i - \mathbf{\hat{y}}_i \right)^2 .
+\]</span> Typically, some form of the gradient descent method is used to iteratively improve the model parameters <span class="math inline">\(A^{(k)}\)</span> towards an optimum of <span class="math inline">\(S\)</span>. This requires the gradient of <span class="math inline">\(S\)</span> with respect to each of the <span class="math inline">\(A^{(k)}\)</span>. We start with <span class="math inline">\(A^{(n-1)}\)</span> and evaluate <span class="math display">\[
+\begin{aligned}
+-\frac{\partial S}{\partial A^{(n-1)}} 
+&amp;= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right) 
+\frac{\partial \mathbf{\hat{y}}^{(n)}}{\partial A^{(n-1)}} \\
+&amp;= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right) 
+\sigma^{(n-1) \prime} \left( \mathbf{\hat{y}}^{(n-1)} A^{(n-1)} \right)
+\mathbf{\hat{y}}^{(n-1)},
+\end{aligned}
+\]</span> making indices and summation over <span class="math inline">\(i\)</span> implicit. For the deeper levels of the network, we take advantage of the iterative definition of the network to write the derivative as a chain-rule product <span class="math display">\[
+-\frac{\partial S}{\partial A^{(n-k-1)}} 
+= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right) 
+\frac{\partial \mathbf{\hat{y}}^{(n)}}{\partial \mathbf{\hat{y}}^{(n-1)}}
+\frac{\partial \mathbf{\hat{y}}^{(n-1)}}{\partial \mathbf{\hat{y}}^{(n-2)}}
+\ldots
+\frac{\partial \mathbf{\hat{y}}^{(n-k+1)}}{\partial \mathbf{\hat{y}}^{(n-k)}}
+\frac{\partial \mathbf{\hat{y}}^{(n-k)}}{\partial A^{(n-k-1)}} .
+\]</span> Evaluating each factor in the product, <span class="math display">\[
+\begin{aligned}
+-\frac{\partial S}{\partial A^{(n-k-1)}} 
+= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right)
+&amp;\sigma^{(n-1) \prime}
+\left( \mathbf{\hat{y}}^{(n-1)} A^{(n-1)} \right) A^{(n-1)} \\
+&amp;\sigma^{(n-2) \prime}
+\left( \mathbf{\hat{y}}^{(n-2)} A^{(n-2)} \right) A^{(n-2)} \\
+&amp;\qquad \ldots \\
+&amp;\sigma^{(n-k) \prime}
+\left( \mathbf{\hat{y}}^{(n-k)} A^{(n-k)} \right) A^{(n-k)} \\
+&amp;\sigma^{(n-k-1) \prime}
+\left( \mathbf{\hat{y}}^{(n-k-1)} A^{(n-k-1)} \right) \mathbf{\hat{y}}^{(n-k-1)} .
+\end{aligned}
+\]</span> This expression suggests that the gradients be computed in reverse order, iteratively constructing the intermediate quantities <span class="math display">\[
+\begin{aligned}
+P^{(n-1)} &amp;= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right)
+\sigma^{(n-1) \prime} \left( \mathbf{\hat{y}}^{(n-1)} A^{(n-1)} \right) \\
+P^{(n-k-1}) &amp;= P^{(n-k)} A^{(n-k)}
+\sigma^{(n-k-1) \prime} \left( \mathbf{\hat{y}}^{(n-k-1)} A^{(n-k-1)} \right)
+\end{aligned}
+\]</span> and putting <span class="math display">\[
+-\frac{\partial S}{\partial A^{(n-k)}} 
+= P^{(n-k)} \mathbf{\hat{y}}^{(n-k)} .
+\]</span></p>
+<p>To see this in action, consider a two-layer model with tanh activation on both layers.</p>
+<pre><code>class nn_model:
+    def __init__( self, m0, m1, m2  ):
+        self.m0 = m0
+        self.m1 = m1
+        self.m2 = m2
+
+        self.a0 = np.random.normal( size = ( self.m0, self.m1 ) )
+        self.a1 = np.random.normal( size = ( self.m1, self.m2 ) )
+
+    def predict( self, x ):
+        ## Forward pass only
+        z0 = x
+        z1 = np.tanh( z0 @ self.a0 )
+        z2 = np.tanh( z1 @ self.a1 )
+        return z2
+
+    def loss( self, x, y ):
+        yhat = self.predict( x )
+        return np.sum( ( y - yhat ) ** 2 ) / y.size
+
+    def grad( self, x, y ):
+        ## Forward pass
+        z0 = x
+        z1 = np.tanh( z0 @ self.a0 )
+        z2 = np.tanh( z1 @ self.a1 )
+    
+        ## Backward pass
+        p1 = ( y - z2 ) / np.cosh( z1 @ self.a1 ) ** 2
+        p0 = p1 @ np.transpose( self.a1 ) / np.cosh( z0 @ self.a0 ) ** 2
+    
+        g1 = -np.transpose( z1 ) @ p1
+        g0 = -np.transpose( z0 ) @ p0
+        return g0, g1
+
+    def iterate( self, x, y, step ):
+        ( g0, g1 ) = self.grad( x, y )
+        self.a0 -= step * g0
+        self.a1 -= step * g1
+        return</code></pre>
+<p>We can set up some toy data using a random normal design matrix <code>x</code>, choosing a random neural network model and using it to create some targets <code>y</code>.</p>
+<pre><code>n = 100000
+m0 = 4
+m1 = 3
+m2 = 2
+
+x = np.random.normal( size = ( n, m0 ) )
+true_nn = nn_model( m0, m1, m2 )
+y = true_nn.predict( x ) + np.random.normal( size = ( n, m2 ) )</code></pre>
+<p>By construction, the loss on <code>true_nn</code> on the data sample <code>(x, y)</code> is the sample variance of 200k independent draws from a random normal distribution, and is therefore very close to 1.0:</p>
+<pre><code>true_nn.loss( x, y )
+0.9984112413952128</code></pre>
+<p>We now choose another random neural net as a starting point for back-propagation over 200 iterations.</p>
+<pre><code>nn = nn_model( m0, m1, m2 )
+loss = np.zeros( shape = 200 )
+step = 1.0e-5
+
+for j in range( len( loss ) ):
+    loss[j] = nn.loss( x, y )
+    nn.iterate( x, y, step )</code></pre>
+<p>We also construct the zero model and an OLS model for comparison.</p>
+<pre><code>zero_loss = np.sum( y ** 2 ) / y.size
+
+ols = sm.OLS( y, x ).fit()
+yhat = ols.predict( x )
+ols_loss = np.sum( ( y - yhat ) **2 ) / y.size</code></pre>
+<p>We can then plot the loss for the neural net over each iteration, together with the loss for the zero, OLS and true model. It can be seen from the chart that back propagation has been successful and the neural net has been trained so that its output is almost equivalent to the true model. The neural net strongly outperforms the zero model and OLS model on this toy dataset.</p>
+<figure>
+<img src="/static/blog/20230526-neural-network-back-propagation/backprop-loss.png" alt="" /><figcaption>Back-propagation in action.</figcaption>
+</figure>
