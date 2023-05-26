@@ -89,7 +89,7 @@ $$
 \begin{aligned}
 P^{(n-1)} &= \left( \mathbf{y} - \mathbf{\hat{y}}^{(n)} \right)
 \sigma^{(n-1) \prime} \left( \mathbf{\hat{y}}^{(n-1)} A^{(n-1)} \right) \\
-P^{(n-k-1}) &= P^{(n-k)} A^{(n-k)}
+P^{(n-k-1)} &= P^{(n-k)} A^{(n-k)}
 \sigma^{(n-k-1) \prime} \left( \mathbf{\hat{y}}^{(n-k-1)} A^{(n-k-1)} \right)
 \end{aligned}
 $$
