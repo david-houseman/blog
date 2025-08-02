@@ -43,5 +43,10 @@
 	"title": "Neural network back-propagation",
 	"author": "David Houseman",
 	"date": "2023-05-26"
+    },
+    {
+        "title": "Tensor structures in field theory",
+        "author": "David Houseman",
+        "date": "2025-08-02"
     }
 ]
