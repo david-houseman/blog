@@ -53,5 +53,10 @@
         "title": "Tensor structures in field theory",
         "author": "David Houseman",
         "date": "2025-08-02"
+    },
+    {
+        "title": "Debian bootstrap",
+        "author": "David Houseman",
+        "date": "2025-08-16"
     }
 ]

@@ -1,0 +1,78 @@
+<p>Steps to bootstrap a minimal debian 13 ‘Trixie’ install onto a spare
+partition.</p>
+<ol type="1">
+<li><p>Allocate the partition using <code>fdisk</code>.</p></li>
+<li><p>Make the filesystem.</p>
+<pre><code>mkfs.ext4 ${partition}
+e2fsck ${partition}
+e2label ${partition} debian_13</code></pre></li>
+<li><p>Check the debian mirror in
+<code>/etc/apt/sources.list.d/debian.sources</code>.</p></li>
+<li><p>Mount the partition</p>
+<pre><code>mount ${partition} /mnt</code></pre></li>
+<li><p>Choose the desired debian distribution.</p>
+<pre><code>10 - buster
+11 - bullseye
+12 - bookworm
+13 - trixie
+14 - forky</code></pre></li>
+<li><p>Bootstrap install base packages into the new partition.</p>
+<pre><code>debootstrap --variant=minbase ${dist} ${chroot} ${mirror}</code></pre></li>
+<li><p>Copy apt sources.</p>
+<pre><code>cp --parents /etc/apt/sources.list.d/debian.sources /mnt</code></pre></li>
+<li><p>Copy network configuration.</p>
+<pre><code>cp --parents /etc/network/interfaces /mnt
+cp --parents /etc/hosts /mnt</code></pre></li>
+<li><p>Copy filesystem table. This is needed, because an empty fstab
+causes / to be mounted read-only.</p>
+<pre><code>cp --parents /etc/fstab /mnt</code></pre></li>
+<li><p>System dirs are needed by some packages.</p>
+<pre><code>mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys</code></pre></li>
+<li><p><code>chroot</code> into the new partition and update apt.</p>
+<pre><code>chroot /mnt
+apt-get update
+apt-get upgrade</code></pre></li>
+<li><p>Install system packages.</p>
+<pre><code>apt-get install busybox linux-image-amd64 systemd-sysv pciutils usbutils grub-efi
+apt-get install bc bsdmainutils debootstrap file gnupg make less nano time
+apt-get install dosfstools ifupdown isc-dhcp-client iputils-ping netbase
+apt-get install openssh-client openssh-server
+apt-get install git man-db manpages rsync</code></pre></li>
+</ol>
+<p><code>wireless-tools</code> is required for wifi. 13. Set
+hostname.</p>
+<pre><code>```
+echo ${host} &gt; /etc/hostname
+```</code></pre>
+<ol start="14" type="1">
+<li><p>Set password.</p>
+<pre><code>passwd</code></pre></li>
+<li><p>Exit the chroot.</p>
+<pre><code>exit</code></pre></li>
+<li><p>Edit <code>/boot/grub/grub.cfg</code> to contain, at a
+minimum:</p>
+<pre><code>set default=0
+set timeout=5
+
+menuentry &quot;debian 13&quot; {
+    insmod all_video
+    search --label --set debian_13
+    linux /vmlinuz root=LABEL=debian_13
+    initrd /initrd.img
+}</code></pre></li>
+<li><p>Reinstall grub.</p>
+<pre><code>mount -L efi /boot/efi
+grub-install --target=x86_64-efi ${device}</code></pre></li>
+</ol>
+<p>That should, in theory, be enough to reboot into the new
+installation.</p>
+<ol start="18" type="1">
+<li><p>Window manager.</p>
+<pre><code>apt-get install xorg xterm xfce4</code></pre></li>
+<li><p>Applications.</p>
+<pre><code>apt-get install firefox-esr texlive</code></pre></li>
+<li><p>Web development</p>
+<pre><code>apt-get install pandoc python3-flask python3-git python3-pytz python3-slugify</code></pre></li>
+</ol>
