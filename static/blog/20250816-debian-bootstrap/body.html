@@ -15,7 +15,8 @@ e2label ${partition} debian_13</code></pre></li>
 11 - bullseye
 12 - bookworm
 13 - trixie
-14 - forky</code></pre></li>
+14 - forky
+15 - duke</code></pre></li>
 <li><p>Bootstrap install base packages into the new partition.</p>
 <pre><code>debootstrap --variant=minbase ${dist} ${chroot} ${mirror}</code></pre></li>
 <li><p>Copy apt sources.</p>
@@ -39,14 +40,10 @@ apt-get upgrade</code></pre></li>
 apt-get install bc bsdmainutils debootstrap file gnupg make less nano time
 apt-get install dosfstools ifupdown isc-dhcp-client iputils-ping netbase
 apt-get install openssh-client openssh-server
-apt-get install git man-db manpages rsync</code></pre></li>
-</ol>
-<p><code>wireless-tools</code> is required for wifi. 13. Set
-hostname.</p>
-<pre><code>```
-echo ${host} &gt; /etc/hostname
-```</code></pre>
-<ol start="14" type="1">
+apt-get install git man-db manpages rsync</code></pre>
+<p><code>wireless-tools</code> is required for wifi.</p></li>
+<li><p>Set hostname.</p>
+<pre><code>echo ${host} &gt; /etc/hostname</code></pre></li>
 <li><p>Set password.</p>
 <pre><code>passwd</code></pre></li>
 <li><p>Exit the chroot.</p>

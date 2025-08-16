@@ -79,7 +79,8 @@ to be mounted read-only.
     apt-get install git man-db manpages rsync
     ```
 
-`wireless-tools` is required for wifi. 
+    `wireless-tools` is required for wifi. 
+
 13. Set hostname.
 
     ```
